@@ -7,13 +7,15 @@ import {
   Modal,
   TouchableWithoutFeedback,
   View,
+  TouchableOpacity,
 } from 'react-native';
-import { BlurView } from '@sbaiahmed1/react-native-blur';
+import { BlurView, BlurType } from '@sbaiahmed1/react-native-blur';
 import { DEMO_IMAGES } from '../constants';
 import { useState } from 'react';
 
 export default function HomeScreen() {
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
+  const [blurType, setBlurType] = useState<BlurType>('dark');
 
   return (
     <ImageBackground
@@ -23,6 +25,20 @@ export default function HomeScreen() {
     >
       <ScrollView contentContainerStyle={styles.scrollContent}>
         <Text style={styles.header}>Welcome to React Native Blur</Text>
+
+        <TouchableOpacity
+          onPress={() => {
+            setBlurType('xlight');
+          }}
+        >
+          <BlurView blurType={blurType} blurAmount={50} style={styles.card}>
+            <Text style={styles.cardTitle}>🔄 Update Blur Type</Text>
+            <Text style={styles.cardText}>
+              This part will be updated to xlight blurType when the user click
+              this card
+            </Text>
+          </BlurView>
+        </TouchableOpacity>
 
         <BlurView blurType="regular" blurAmount={50} style={styles.card}>
           <Text style={styles.cardTitle}>🎨 Beautiful Blur Effects</Text>
